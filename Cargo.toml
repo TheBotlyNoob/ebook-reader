@@ -1,0 +1,36 @@
+[package]
+name = "ebook-reader"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+egui = "0.20"
+eframe = { version = "0.20", default-features = false, features = [
+    "accesskit",
+    "glow",
+    "persistence",
+    "default_fonts",
+    "dark-light",
+] }
+tracing = "0.1.13"
+epub = "1.2"
+rfd = "0.10"
+poll-promise = "0.2"
+prokio = "0.1"
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+tracing-subscriber = "0.3"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+console_error_panic_hook = "0.1.6"
+tracing-wasm = "0.2"
+wasm-bindgen-futures = "0.4"
+
+[profile.release]
+opt-level = "z"
+
+# Optimize all dependencies even in debug builds:
+[profile.dev.package."*"]
+opt-level = 2

@@ -1,29 +1,26 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/rust
 {
-	"name": "Rust",
-	"image": "mcr.microsoft.com/devcontainers/rust:0-1-bullseye",
-	"features": {
-		"ghcr.io/devcontainers/features/desktop-lite:1": {}
-	}
+    "name": "Rust",
+    "image": "mcr.microsoft.com/devcontainers/rust:0-1-bullseye",
+    "features": {
+        "ghcr.io/devcontainers/features/desktop-lite:1": {}
+    },
 
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
+    // Features to add to the dev container. More info: https://containers.dev/features.
+    // "features": {},
 
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [
-        6080
-    ],
-    
-    "extensions": ["rust-lang.rust-analyzer"],
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    "forwardPorts": [6080],
 
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "rustc --version",
+    "extensions": ["rust-lang.rust-analyzer"]
 
-	// Configure tool-specific properties.
-	// "customizations": {},
+    // Use 'postCreateCommand' to run commands after the container is created.
+    // "postCreateCommand": "rustc --version",
 
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
-    
+    // Configure tool-specific properties.
+    // "customizations": {},
+
+    // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+    // "remoteUser": "root"
 }
