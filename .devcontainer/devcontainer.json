@@ -2,7 +2,6 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/rust
 {
     "name": "Rust",
-    "image": "mcr.microsoft.com/devcontainers/rust:0-1-bullseye",
     "features": {
         "ghcr.io/devcontainers/features/desktop-lite:1": {}
     },
@@ -13,7 +12,9 @@
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     "forwardPorts": [6080],
 
-    "extensions": ["rust-lang.rust-analyzer"]
+    "extensions": ["rust-lang.rust-analyzer"],
+
+    "postCreateCommand": "curl -fsSL https://sh.rustup.rs | sh -s -- -y && sudo apt update && sudo apt install libgtk-3-dev"
 
     // Use 'postCreateCommand' to run commands after the container is created.
     // "postCreateCommand": "rustc --version",

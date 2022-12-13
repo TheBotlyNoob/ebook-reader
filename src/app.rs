@@ -41,28 +41,14 @@ impl App {
         ui.label("Drag and drop an EPUB file here");
         if ui.button("Or click here to open a file").clicked() {
             let promise = self.file_open_dialog.get_or_insert_with(|| {
-                let (s, p) = Promise::new();
-                prokio::spawn_local(async {
-                    let f = rfd::AsyncFileDialog::new()
+                Promise::spawn_async(
+                    rfd::AsyncFileDialog::new()
                         .add_filter("book", &["epub"])
-                        .pick_file()
-                        .await;
-
-                    s.send(f);
-                });
-                p
+                        .pick_file(),
+                )
             });
-            if let Some(p) = &self.file_open_dialog {
-                if let Some(Some(file)) = p.ready() {
-                    debug!("Got file");
-                    self.file_open_dialog = None;
-                    let (s, p) = Promise::new();
-                    self._get_file = Some(p);
-                    prokio::spawn_local(async move {
-                        let bytes = file.read().await;
-                        s.send(bytes);
-                    });
-                }
+            if let Some(file) = promise.ready().and_then(|x| x.as_ref()) {
+                debug!("Got file");
             }
         }
 
