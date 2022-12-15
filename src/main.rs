@@ -1,39 +1,98 @@
-#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // hide console window on Windows in release
-#![warn(clippy::pedantic, clippy::nursery)]
+use dioxus::prelude::*;
+use epub::doc::EpubDoc;
+use std::{fmt::Debug, io::Cursor};
 
-mod app;
+static BOOK: Atom<Option<Book>> = |_| None;
 
-#[cfg(not(target_arch = "wasm32"))]
-fn main() {
-    // Log to stdout (if you run with `RUST_LOG=debug`).
-    tracing_subscriber::fmt::init();
-
-    let options = eframe::NativeOptions {
-        drag_and_drop_support: true,
-        initial_window_size: Some(egui::vec2(900., 700.)),
-        ..Default::default()
-    };
-    eframe::run_native(
-        "eBook Reader",
-        options,
-        Box::new(|_cc| Box::new(app::App::default())),
-    );
+struct Book {
+    doc: EpubDoc<Cursor<Vec<u8>>>,
+    title: String,
 }
 
-#[cfg(target_arch = "wasm32")]
+impl Book {
+    pub fn new(doc: EpubDoc<Cursor<Vec<u8>>>) -> Self {
+        Self {
+            title: doc.mdata("title").unwrap_or_default(),
+            doc,
+        }
+    }
+}
+
+impl Debug for Book {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        #[derive(Debug)]
+        struct EpubDoc;
+        f.debug_struct("Book").field("doc", &EpubDoc).finish()
+    }
+}
+
 fn main() {
-    // Make sure panics are logged using `console.error`.
-    console_error_panic_hook::set_once();
+    dioxus::desktop::launch(|cx| {
+        let bulma = include_str!("../bulma.min.css");
+        cx.render(rsx! {
+            style {
+                "
+                * {{
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }}
+                html, body, #main {{
+                    width: 100%;
+                    height: 100%;
+                }}
+                #main {{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }}
 
-    // Redirect tracing to console.log and friends:
-    tracing_wasm::set_as_global_default();
+                {bulma}
+                "
+            },
 
-    wasm_bindgen_futures::spawn_local(async {
-        let _ = eframe::start_web(
-            "app",
-            eframe::WebOptions::default(),
-            Box::new(|_cc| Box::new(app::App::default())),
-        )
-        .await;
+
+            app()
+        })
     });
+}
+
+fn app(cx: Scope) -> Element {
+    let book = use_read(&cx, BOOK);
+    cx.render(if let Some(book) = book {
+        rsx! {
+            h1 {
+                style: "color: red;",
+                "{book.title}"
+            }
+        }
+    } else {
+        let set_book = use_set(&cx, BOOK);
+
+        let onclick = move |_| {
+            cx.spawn({
+                let set_book = set_book.clone();
+                async move {
+                    if let Some(f) = rfd::AsyncFileDialog::new()
+                        .add_filter("book", &["epub"])
+                        .pick_file()
+                        .await
+                    {
+                        if let Ok(doc) = EpubDoc::from_reader(Cursor::new(f.read().await)) {
+                            let book = Some(Book::new(doc));
+                            println!("{book:#?}");
+                            set_book(book);
+                        }
+                    };
+                }
+            })
+        };
+
+        rsx! {
+            button {
+                onclick: onclick,
+                "click here to open a book"
+            }
+        }
+    })
 }

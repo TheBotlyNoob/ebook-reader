@@ -3,7 +3,8 @@
 {
     "name": "Rust",
     "features": {
-        "ghcr.io/devcontainers/features/desktop-lite:1": {}
+        "ghcr.io/devcontainers/features/desktop-lite:1": {},
+        "ghcr.io/devcontainers/features/rust:1": {}
     },
 
     // Features to add to the dev container. More info: https://containers.dev/features.
@@ -14,7 +15,7 @@
 
     "extensions": ["rust-lang.rust-analyzer"],
 
-    "postCreateCommand": "curl -fsSL https://sh.rustup.rs | sh -s -- -y && sudo apt update && sudo apt install libgtk-3-dev"
+    "postCreateCommand": "sudo apt update && sudo apt install libwebkit2gtk-4.0-dev"
 
     // Use 'postCreateCommand' to run commands after the container is created.
     // "postCreateCommand": "rustc --version",
