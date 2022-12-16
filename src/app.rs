@@ -2,6 +2,17 @@ use dioxus::prelude::*;
 use epub::doc::EpubDoc;
 use std::{fmt::Debug, io::Cursor};
 
+/// wraps on top of `web_sys::console.log_1`, use it like:
+/// ```ignore
+/// println!("a is {}", a);
+/// ```
+#[macro_export]
+macro_rules! println {
+    ($($t:tt)*) => {{
+        web_sys::console::log_1(&format!("{}", format_args!($($t)*)).into());
+    }};
+}
+
 static BOOK: Atom<Option<Book>> = |_| None;
 
 struct Book {
@@ -86,7 +97,7 @@ async fn open_book() -> Option<Book> {
     book
 }
 
-#[cfg(target_arch = "wasm32")]
+#[cfg(target_arch = "wasm32")] // I know `rfd` supports wasm, but it doesn't really work how I want it to
 async fn open_book() -> Option<Book> {
     use futures::StreamExt;
     use wasm_bindgen::{closure::Closure, JsCast};
