@@ -78,9 +78,13 @@ fn app(cx: Scope) -> Element {
         };
 
         rsx! {
-            button {
-                onclick: onclick,
-                "click here to open a book"
+            div {
+                class: "container",
+                button {
+                class: "button is-primary",
+                    onclick: onclick,
+                    "click here to open a book"
+                }
             }
         }
     })
