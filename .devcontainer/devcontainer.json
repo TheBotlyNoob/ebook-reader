@@ -15,7 +15,7 @@
 
     "extensions": ["rust-lang.rust-analyzer"],
 
-    "postCreateCommand": "sudo apt update && sudo apt install libwebkit2gtk-4.0-dev"
+    "postCreateCommand": "sudo apt update && sudo apt install -y libwebkit2gtk-4.0-dev"
 
     // Use 'postCreateCommand' to run commands after the container is created.
     // "postCreateCommand": "rustc --version",
