@@ -2,6 +2,8 @@ use dioxus::prelude::*;
 use epub::doc::EpubDoc;
 use std::{fmt::Debug, io::Cursor};
 
+mod styles;
+
 /// wraps on top of `web_sys::console.log_1`, use it like:
 /// ```ignore
 /// println!("a is {}", a);
@@ -38,17 +40,14 @@ impl Debug for Book {
 }
 
 pub fn root(cx: Scope) -> Element {
-    let bulma = include_str!("../bulma.min.css");
     cx.render(rsx! {
         style {
             "
-                html, body, #main {{
-                    width: 100%;
-                    height: 100%;
-                }}
-
-                {bulma}
-                "
+            html, body, #main {{
+                width: 100%;
+                height: 100%;
+            }}
+            "
         },
 
 
@@ -61,7 +60,7 @@ fn app(cx: Scope) -> Element {
     cx.render(if let Some(book) = book {
         rsx! {
             h1 {
-                class: "title is-1 has-text-centered",
+                class: "centerv",
                 "{book.title}"
             }
         }
@@ -78,13 +77,10 @@ fn app(cx: Scope) -> Element {
         };
 
         rsx! {
-            div {
-                class: "container",
-                button {
-                class: "button is-primary",
-                    onclick: onclick,
-                    "click here to open a book"
-                }
+            button {
+                style: styles::center(),
+                onclick: onclick,
+                "click here to open a book"
             }
         }
     })
