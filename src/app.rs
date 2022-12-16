@@ -9,7 +9,7 @@ use std::{fmt::Debug, io::Cursor};
 #[macro_export]
 macro_rules! println {
     ($($t:tt)*) => {{
-        web_sys::console::log_1(&format!("{}", format_args!($($t)*)).into());
+        web_sys::console::log_1(&format!($($t)*));
     }};
 }
 
@@ -111,7 +111,7 @@ async fn open_book() -> Option<Book> {
         .ok()?
         .dyn_into::<web_sys::HtmlInputElement>()
         .ok()?;
-    input.set_accept("epub");
+    input.set_accept(".epub");
     input.set_type("file");
     let (tx, mut rx) = futures::channel::mpsc::channel(1);
     input
