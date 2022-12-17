@@ -1,14 +1,17 @@
-use std::fmt::Arguments;
-
-use std::format_args as f;
-type Ret = Arguments<'static>;
-
 macro_rules! st {
-    ($name:ident, $body:expr) => {
-        pub fn $name() -> Ret {
-            f!($body)
+    ($fn:ident($($arg:ident: $type:ty),*), $($fmt:tt)*) => {
+        #[allow(dead_code)]
+        pub fn $fn($($arg: $type,)*) -> std::fmt::Arguments<'static> {
+            ::std::format_args!($($fmt)*)
         }
     };
 }
 
-st!(center, "text-align: center;");
+st!(
+    container(),
+    "
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    "
+);

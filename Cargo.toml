@@ -7,10 +7,12 @@ edition = "2021"
 
 [dependencies]
 epub = "1.2"
+base64 = "0.20"
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 rfd = "0.10"
 dioxus = { version = "0.2.4", features = ["fermi", "desktop"] }
+
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 wasm-bindgen = "0.2"
 web-sys = { version = "0.3", features = [

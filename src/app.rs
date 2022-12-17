@@ -15,7 +15,7 @@ macro_rules! println {
     }};
 }
 
-static BOOK: Atom<Option<Book>> = |_| None;
+static BOOK: AtomRef<Option<Book>> = |_| None;
 
 struct Book {
     doc: EpubDoc<Cursor<Vec<u8>>>,
@@ -56,31 +56,57 @@ pub fn root(cx: Scope) -> Element {
 }
 
 fn app(cx: Scope) -> Element {
-    let book = use_read(&cx, BOOK);
-    cx.render(if let Some(book) = book {
+    let book = use_atom_ref(&cx, BOOK);
+
+    cx.render(if let Some(Book { title, doc }) = &mut *book.write() {
         rsx! {
             h1 {
-                class: "centerv",
-                "{book.title}"
+                "{title}",
+            },
+            img {
+                src: {
+                        format_args!("{}", {
+                            let cover = if let Some(cover) = doc.resources.get("coverimagestandard") {
+                                Some(cover)
+                            } else {
+                                doc.resources.get(&doc.get_cover_id().unwrap_or_default())
+                            };
+
+                            if let Some((path, mime)) = cover {
+                                let mime = mime.clone();
+                                let path = path.clone();
+                                let img = doc.get_resource_by_path(path).unwrap();
+                                let img = base64::encode(img);
+
+
+                                format!(
+                                    "data:{mime};base64,{img}",
+                                ) // we need to allocate because... lifetimes?
+                            } else {
+                                String::new()
+                            }
+                        })
+                }
+            }
+            p {
+                [format_args!("{}", doc.mdata("description").unwrap_or_default())]
             }
         }
     } else {
-        let set_book = use_set(&cx, BOOK);
-
         let onclick = move |_| {
-            cx.spawn({
-                let set_book = set_book.clone();
-                async move {
-                    set_book(open_book().await);
-                }
+            let book = book.clone();
+            cx.spawn(async move {
+                *book.write() = open_book().await;
             })
         };
 
         rsx! {
-            button {
-                style: styles::center(),
-                onclick: onclick,
-                "click here to open a book"
+            div {
+                style: "",
+                button {
+                    onclick: onclick,
+                    "click here to open a book"
+                }
             }
         }
     })
@@ -93,8 +119,7 @@ async fn open_book() -> Option<Book> {
         .pick_file()
         .await?;
     let doc = EpubDoc::from_reader(Cursor::new(f.read().await)).ok()?;
-    let book = Some(Book::new(doc));
-    book
+    Some(Book::new(doc))
 }
 
 #[cfg(target_arch = "wasm32")] // I know `rfd` supports wasm, but it doesn't really work how I want it to
