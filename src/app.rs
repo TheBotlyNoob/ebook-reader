@@ -3,6 +3,7 @@ use epub::doc::EpubDoc;
 use std::{fmt::Debug, io::Cursor};
 
 mod styles;
+use styles::styles;
 
 /// wraps on top of `web_sys::console.log_1`, use it like:
 /// ```ignore
@@ -43,6 +44,11 @@ pub fn root(cx: Scope) -> Element {
     cx.render(rsx! {
         style {
             "
+            * {{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }}
             html, body, #main {{
                 width: 100%;
                 height: 100%;
@@ -64,29 +70,26 @@ fn app(cx: Scope) -> Element {
                 "{title}",
             },
             img {
-                src: {
-                        format_args!("{}", {
-                            let cover = if let Some(cover) = doc.resources.get("coverimagestandard") {
-                                Some(cover)
-                            } else {
-                                doc.resources.get(&doc.get_cover_id().unwrap_or_default())
-                            };
+                src: format_args!("{}", {
+                    let cover = if let Some(cover) = doc.resources.get("coverimagestandard") {
+                        Some(cover)
+                    } else {
+                        doc.resources.get(&doc.get_cover_id().unwrap_or_default())
+                    };
 
-                            if let Some((path, mime)) = cover {
-                                let mime = mime.clone();
-                                let path = path.clone();
-                                let img = doc.get_resource_by_path(path).unwrap();
-                                let img = base64::encode(img);
+                    if let Some((path, mime)) = cover {
+                        let mime = mime.clone();
+                        let path = path.clone();
+                        let img = doc.get_resource_by_path(path).unwrap();
+                        let img = base64::encode(img);
 
-
-                                format!(
-                                    "data:{mime};base64,{img}",
-                                ) // we need to allocate because... lifetimes?
-                            } else {
-                                String::new()
-                            }
-                        })
-                }
+                        format!(
+                            "data:{mime};base64,{img}",
+                        ) // we need to allocate because... lifetimes?
+                    } else {
+                        String::new()
+                    }
+                })
             }
             p {
                 [format_args!("{}", doc.mdata("description").unwrap_or_default())]
@@ -102,7 +105,7 @@ fn app(cx: Scope) -> Element {
 
         rsx! {
             div {
-                style: "",
+                style: styles!(container()),
                 button {
                     onclick: onclick,
                     "click here to open a book"

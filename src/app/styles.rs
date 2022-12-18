@@ -1,17 +1,38 @@
+macro_rules! __hack_ignore {
+    ($var:expr, $act:expr) => {
+        $act
+    };
+}
+pub(crate) use __hack_ignore;
+
+macro_rules! styles {
+    ($($style:ident($($arg:expr),*)),*) => {
+        {
+            styles!( $( styles::$style( $($arg),* ) )* )
+        }
+    };
+    ($($arg:expr)*) => {
+        unsafe { std::mem::transmute::<_, std::fmt::Arguments<'static>>(format_args!(concat!($(styles::__hack_ignore!($arg, "{}")),*), $($arg),*)) }
+    };
+}
+
+pub(crate) use styles;
+
 macro_rules! st {
-    ($fn:ident($($arg:ident: $type:ty),*), $($fmt:tt)*) => {
+    ($(#[doc = $doc:expr])? $fn:ident($($arg:ident: $type:ty),*) => $body:expr) => {
         #[allow(dead_code)]
-        pub fn $fn($($arg: $type,)*) -> std::fmt::Arguments<'static> {
-            ::std::format_args!($($fmt)*)
+        $(#[doc = $doc])?
+        pub fn $fn($($arg: $type),*) -> impl std::fmt::Display {
+            $body
         }
     };
 }
 
 st!(
-    container(),
-    "
+/// Center the elements in the container.
+container() => "
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    "
-);
+    justify-content: center;
+");
