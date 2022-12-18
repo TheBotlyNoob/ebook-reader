@@ -1,20 +1,11 @@
 use dioxus::prelude::*;
 use epub::doc::EpubDoc;
 use std::{fmt::Debug, io::Cursor};
+#[allow(unused_imports)]
+use tracing::{debug, error, trace};
 
 pub mod styles;
 use styles::styles;
-
-/// wraps on top of `web_sys::console.log_1`, use it like:
-/// ```ignore
-/// println!("a is {}", a);
-/// ```
-#[macro_export]
-macro_rules! println {
-    ($($t:tt)*) => {{
-        web_sys::console::log_1(&format!($($t)*).into());
-    }};
-}
 
 static BOOK: AtomRef<Option<Book>> = |_| None;
 
@@ -42,19 +33,19 @@ impl Debug for Book {
 
 pub fn root(cx: Scope) -> Element {
     cx.render(rsx! {
-        style {
-            "
-            * {{
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }}
-            html, body, #main {{
-                width: 100%;
-                height: 100%;
-            }}
-            "
-        },
+        // style {
+        //     "
+        //     * {{
+        //         margin: 0;
+        //         padding: 0;
+        //         box-sizing: border-box;
+        //     }}
+        //     html, body, #main {{
+        //         width: 100%;
+        //         height: 100%;
+        //     }}
+        //     "
+        // },
 
 
         app()
@@ -97,6 +88,7 @@ fn app(cx: Scope) -> Element {
         }
     } else {
         let onclick = move |_| {
+            debug!("opening book");
             let book = book.clone();
             cx.spawn(async move {
                 *book.write() = open_book().await;
@@ -143,7 +135,7 @@ async fn open_book() -> Option<Book> {
             let input = input.clone();
             Closure::<dyn FnMut()>::new(move || {
                 let mut tx = tx.clone();
-                println!("file selected");
+                debug!("file selected");
                 let file = input.files().unwrap().get(0).unwrap();
                 let reader = web_sys::FileReader::new().unwrap();
                 reader.read_as_array_buffer(&file).unwrap();
@@ -155,7 +147,7 @@ async fn open_book() -> Option<Book> {
                     let buf = js_sys::Uint8Array::new(&buf).to_vec();
                     let Ok(doc) = EpubDoc::from_reader(Cursor::new(buf)) else {
                         tx.try_send(None).unwrap();
-                        println!("failed to open book");
+                        error!("failed to open book");
                         return;
                     };
                     let book = Some(Book::new(doc));
@@ -168,6 +160,6 @@ async fn open_book() -> Option<Book> {
         })
         .unwrap();
     input.click();
-    println!("waiting for book...");
+    debug!("waiting for book...");
     rx.next().await.unwrap()
 }
