@@ -2,7 +2,7 @@ use dioxus::prelude::*;
 use epub::doc::EpubDoc;
 use std::{fmt::Debug, io::Cursor};
 
-mod styles;
+pub mod styles;
 use styles::styles;
 
 /// wraps on top of `web_sys::console.log_1`, use it like:
