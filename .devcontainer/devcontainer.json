@@ -13,9 +13,7 @@
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     "forwardPorts": [6080],
 
-    "extensions": ["rust-lang.rust-analyzer"],
-
-    "postCreateCommand": "sudo apt update && sudo apt install -y libwebkit2gtk-4.0-dev"
+    "extensions": ["rust-lang.rust-analyzer"]
 
     // Use 'postCreateCommand' to run commands after the container is created.
     // "postCreateCommand": "rustc --version",

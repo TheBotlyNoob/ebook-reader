@@ -1,19 +1,80 @@
-use dioxus::prelude::*;
 use epub::doc::EpubDoc;
+use iced::{
+    alignment::Horizontal,
+    widget::{button, column, row, text},
+    Alignment, Application, Command, Element, Length, Settings, Theme,
+};
 use std::{fmt::Debug, io::Cursor};
-#[allow(unused_imports)]
-use tracing::{debug, error, trace};
 
-pub mod styles;
-use styles::styles;
+pub fn run() -> iced::Result {
+    Counter::run(Settings::default())
+}
 
-static BOOK: AtomRef<Option<Book>> = |_| None;
+struct Counter {
+    book: Option<Book>,
+}
 
+#[derive(Clone, Debug)]
+enum Msg {
+    BookOpened(Option<Book>),
+    OpenBook,
+    CloseBook,
+}
+
+impl Application for Counter {
+    type Message = Msg;
+    type Executor = iced::executor::Default;
+    type Theme = Theme;
+    type Flags = ();
+
+    fn new(_flags: ()) -> (Self, Command<Msg>) {
+        (Self { book: None }, Command::none())
+    }
+
+    fn title(&self) -> String {
+        String::from("Counter")
+    }
+
+    fn update(&mut self, message: Msg) -> Command<Msg> {
+        use Msg::*;
+        match message {
+            BookOpened(book) => {
+                self.book = book;
+                Command::none()
+            }
+            OpenBook => Command::perform(open_book(), Msg::BookOpened),
+            CloseBook => {
+                self.book = None;
+                Command::none()
+            }
+        }
+    }
+
+    fn view(&self) -> Element<Msg> {
+        if let Some(book) = &self.book {
+            column![
+                row![
+                    text(&book.title),
+                    text(&book.doc.mdata("author").unwrap_or_default())
+                ],
+                text(&book.doc.mdata("description").unwrap_or_default()),
+                button("Close book").on_press(Msg::CloseBook)
+            ]
+        } else {
+            column![button("Click here to open a book").on_press(Msg::OpenBook)]
+        }
+        .width(Length::Fill)
+        .height(Length::Fill)
+        .align_items(Alignment::Center)
+        .into()
+    }
+}
+
+#[derive(Clone, Debug)]
 struct Book {
     doc: EpubDoc<Cursor<Vec<u8>>>,
     title: String,
 }
-
 impl Book {
     pub fn new(doc: EpubDoc<Cursor<Vec<u8>>>) -> Self {
         Self {
@@ -21,90 +82,6 @@ impl Book {
             doc,
         }
     }
-}
-
-impl Debug for Book {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        #[derive(Debug)]
-        struct EpubDoc;
-        f.debug_struct("Book").field("doc", &EpubDoc).finish()
-    }
-}
-
-pub fn root(cx: Scope) -> Element {
-    cx.render(rsx! {
-        // style {
-        //     "
-        //     * {{
-        //         margin: 0;
-        //         padding: 0;
-        //         box-sizing: border-box;
-        //     }}
-        //     html, body, #main {{
-        //         width: 100%;
-        //         height: 100%;
-        //     }}
-        //     "
-        // },
-
-
-        app()
-    })
-}
-
-fn app(cx: Scope) -> Element {
-    let book = use_atom_ref(&cx, BOOK);
-
-    cx.render(if let Some(Book { title, doc }) = &mut *book.write() {
-        rsx! {
-            h1 {
-                "{title}",
-            },
-            img {
-                src: format_args!("{}", {
-                    let cover = if let Some(cover) = doc.resources.get("coverimagestandard") {
-                        Some(cover)
-                    } else {
-                        doc.resources.get(&doc.get_cover_id().unwrap_or_default())
-                    };
-
-                    if let Some((path, mime)) = cover {
-                        let mime = mime.clone();
-                        let path = path.clone();
-                        let img = doc.get_resource_by_path(path).unwrap();
-                        let img = base64::encode(img);
-
-                        format!(
-                            "data:{mime};base64,{img}",
-                        ) // we need to allocate because... lifetimes?
-                    } else {
-                        String::new()
-                    }
-                })
-            }
-            p {
-                [format_args!("{}", doc.mdata("description").unwrap_or_default())]
-            }
-        }
-    } else {
-        let onclick = move |_| {
-            debug!("opening book");
-            let book = book.clone();
-            cx.spawn(async move {
-                *book.write() = open_book().await;
-            })
-        };
-
-        rsx! {
-            div {
-                style: styles!(container()),
-                button {
-                    onclick: onclick,
-                    "click here to open a book"
-                }
-            }
-        }
-    })
 }
 
 #[cfg(not(target_arch = "wasm32"))]
@@ -119,7 +96,7 @@ async fn open_book() -> Option<Book> {
 
 #[cfg(target_arch = "wasm32")] // I know `rfd` supports wasm, but it doesn't really work how I want it to
 async fn open_book() -> Option<Book> {
-    use futures::StreamExt;
+    use iced_web::futures::StreamExt;
     use wasm_bindgen::{closure::Closure, JsCast};
     let doc = web_sys::window()?.document()?;
     let input = doc
@@ -129,13 +106,12 @@ async fn open_book() -> Option<Book> {
         .ok()?;
     input.set_accept(".epub");
     input.set_type("file");
-    let (tx, mut rx) = futures::channel::mpsc::channel(1);
+    let (tx, mut rx) = iced_web::futures::channel::mpsc::channel(1);
     input
         .add_event_listener_with_callback("change", {
             let input = input.clone();
             Closure::<dyn FnMut()>::new(move || {
                 let mut tx = tx.clone();
-                debug!("file selected");
                 let file = input.files().unwrap().get(0).unwrap();
                 let reader = web_sys::FileReader::new().unwrap();
                 reader.read_as_array_buffer(&file).unwrap();
@@ -147,7 +123,6 @@ async fn open_book() -> Option<Book> {
                     let buf = js_sys::Uint8Array::new(&buf).to_vec();
                     let Ok(doc) = EpubDoc::from_reader(Cursor::new(buf)) else {
                         tx.try_send(None).unwrap();
-                        error!("failed to open book");
                         return;
                     };
                     let book = Some(Book::new(doc));
@@ -160,6 +135,5 @@ async fn open_book() -> Option<Book> {
         })
         .unwrap();
     input.click();
-    debug!("waiting for book...");
     rx.next().await.unwrap()
 }
