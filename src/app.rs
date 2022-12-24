@@ -1,17 +1,25 @@
 use epub::doc::EpubDoc;
 use iced::{
-    alignment::Horizontal,
-    widget::{button, column, row, text},
+    widget::{button, column, image, row, text},
     Alignment, Application, Command, Element, Length, Settings, Theme,
 };
 use std::{fmt::Debug, io::Cursor};
+
+macro_rules! col {
+    ($($x:expr),* $(,)?) => {
+        column!($($x),*)
+    };
+}
 
 pub fn run() -> iced::Result {
     Counter::run(Settings::default())
 }
 
+#[derive(Clone, Default)]
 struct Counter {
     book: Option<Book>,
+    /// (image data, mime type)
+    cover: Option<(Vec<u8>, String)>,
 }
 
 #[derive(Clone, Debug)]
@@ -28,18 +36,41 @@ impl Application for Counter {
     type Flags = ();
 
     fn new(_flags: ()) -> (Self, Command<Msg>) {
-        (Self { book: None }, Command::none())
+        (Self::default(), Command::none())
     }
 
     fn title(&self) -> String {
-        String::from("Counter")
+        String::from("eBook Reader")
     }
 
     fn update(&mut self, message: Msg) -> Command<Msg> {
         use Msg::*;
         match message {
             BookOpened(book) => {
-                self.book = book;
+                if let Some(mut book) = book {
+                    let cover = if let Some(cover) = book.doc.resources.get("coverimagestandard") {
+                        Some(cover)
+                    } else {
+                        book.doc
+                            .resources
+                            .get(&book.doc.get_cover_id().unwrap_or_default())
+                    };
+
+                    if let Some((path, mime)) = cover {
+                        let path = path.clone();
+                        let mime = mime.clone();
+
+                        let img = book.doc.get_resource_by_path(path).unwrap();
+
+                        self.cover = Some((img, mime));
+                    } else {
+                        self.cover = None;
+                    }
+
+                    self.book = Some(book);
+                } else {
+                    self.book = None;
+                }
                 Command::none()
             }
             OpenBook => Command::perform(open_book(), Msg::BookOpened),
@@ -52,20 +83,23 @@ impl Application for Counter {
 
     fn view(&self) -> Element<Msg> {
         if let Some(book) = &self.book {
-            column![
+            col![
                 row![
-                    text(&book.title),
+                    text(&book.title).size(50),
                     text(&book.doc.mdata("author").unwrap_or_default())
                 ],
+                image("hu"),
                 text(&book.doc.mdata("description").unwrap_or_default()),
                 button("Close book").on_press(Msg::CloseBook)
             ]
         } else {
-            column![button("Click here to open a book").on_press(Msg::OpenBook)]
+            col![button("Click here to open a book").on_press(Msg::OpenBook)]
         }
         .width(Length::Fill)
         .height(Length::Fill)
         .align_items(Alignment::Center)
+        .spacing(20)
+        .padding(20)
         .into()
     }
 }
