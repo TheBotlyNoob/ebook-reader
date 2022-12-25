@@ -31,7 +31,7 @@ web-sys = { version = "0.3", features = [
 js-sys = "0.3"
 console_error_panic_hook = "0.1"
 tracing-wasm = "0.2"
-iced_web = "0.4"
+futures = "0.3"
 
 [profile.release]
 lto = true

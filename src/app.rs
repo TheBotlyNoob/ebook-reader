@@ -1,15 +1,12 @@
 use epub::doc::EpubDoc;
 use iced::{
-    widget::{button, column, image, row, text},
+    alignment,
+    widget::{button, column as col, image, row, text},
     Alignment, Application, Command, Element, Length, Settings, Theme,
 };
 use std::{fmt::Debug, io::Cursor};
 
-macro_rules! col {
-    ($($x:expr),* $(,)?) => {
-        column!($($x),*)
-    };
-}
+type Epub = EpubDoc<Cursor<Vec<u8>>>;
 
 pub fn run() -> iced::Result {
     Counter::run(Settings::default())
@@ -18,8 +15,6 @@ pub fn run() -> iced::Result {
 #[derive(Clone, Default)]
 struct Counter {
     book: Option<Book>,
-    /// (image data, mime type)
-    cover: Option<(Vec<u8>, String)>,
 }
 
 #[derive(Clone, Debug)]
@@ -47,30 +42,7 @@ impl Application for Counter {
         use Msg::*;
         match message {
             BookOpened(book) => {
-                if let Some(mut book) = book {
-                    let cover = if let Some(cover) = book.doc.resources.get("coverimagestandard") {
-                        Some(cover)
-                    } else {
-                        book.doc
-                            .resources
-                            .get(&book.doc.get_cover_id().unwrap_or_default())
-                    };
-
-                    if let Some((path, mime)) = cover {
-                        let path = path.clone();
-                        let mime = mime.clone();
-
-                        let img = book.doc.get_resource_by_path(path).unwrap();
-
-                        self.cover = Some((img, mime));
-                    } else {
-                        self.cover = None;
-                    }
-
-                    self.book = Some(book);
-                } else {
-                    self.book = None;
-                }
+                self.book = book;
                 Command::none()
             }
             OpenBook => Command::perform(open_book(), Msg::BookOpened),
@@ -84,12 +56,16 @@ impl Application for Counter {
     fn view(&self) -> Element<Msg> {
         if let Some(book) = &self.book {
             col![
-                row![
-                    text(&book.title).size(50),
-                    text(&book.doc.mdata("author").unwrap_or_default())
-                ],
-                image("hu"),
-                text(&book.doc.mdata("description").unwrap_or_default()),
+                row![text(&book.title).size(50), text(&book.author).size(30)],
+                // FIXME: This hangs the app for some reason
+                // if let Some(cover) = self.cover.clone() {
+                //     info!("Cover found - {} bytes", if let Data::Bytes(b) = cover.data() { b.len() } else { 0 });
+                //     image(cover)
+                // } else {
+                //     info!("No cover found");
+                //     image("")
+                // },
+                text(&book.desc),
                 button("Close book").on_press(Msg::CloseBook)
             ]
         } else {
@@ -102,17 +78,42 @@ impl Application for Counter {
         .padding(20)
         .into()
     }
+
+    fn theme(&self) -> Theme {
+        Theme::Dark
+    }
 }
 
 #[derive(Clone, Debug)]
 struct Book {
-    doc: EpubDoc<Cursor<Vec<u8>>>,
+    doc: Epub,
     title: String,
+    author: String,
+    desc: String,
+    cover: Option<image::Handle>,
 }
+
 impl Book {
-    pub fn new(doc: EpubDoc<Cursor<Vec<u8>>>) -> Self {
+    fn new(mut doc: Epub) -> Self {
         Self {
             title: doc.mdata("title").unwrap_or_default(),
+            author: doc.mdata("author").unwrap_or_default(),
+            desc: doc.mdata("description").unwrap_or_default(),
+            cover: {
+                let cover = if let Some(cover) = doc.resources.get("coverimagestandard") {
+                    Some(cover)
+                } else {
+                    doc.resources.get(&doc.get_cover_id().unwrap_or_default())
+                };
+
+                if let Some((path, _)) = cover {
+                    let img = doc.get_resource_by_path(path.clone()).unwrap();
+
+                    Some(image::Handle::from_memory(img))
+                } else {
+                    None
+                }
+            },
             doc,
         }
     }
@@ -130,7 +131,7 @@ async fn open_book() -> Option<Book> {
 
 #[cfg(target_arch = "wasm32")] // I know `rfd` supports wasm, but it doesn't really work how I want it to
 async fn open_book() -> Option<Book> {
-    use iced_web::futures::StreamExt;
+    use futures::StreamExt;
     use wasm_bindgen::{closure::Closure, JsCast};
     let doc = web_sys::window()?.document()?;
     let input = doc
@@ -140,7 +141,7 @@ async fn open_book() -> Option<Book> {
         .ok()?;
     input.set_accept(".epub");
     input.set_type("file");
-    let (tx, mut rx) = iced_web::futures::channel::mpsc::channel(1);
+    let (tx, mut rx) = futures::channel::mpsc::channel(1);
     input
         .add_event_listener_with_callback("change", {
             let input = input.clone();
