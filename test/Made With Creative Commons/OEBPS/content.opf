@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package version="2.0" unique-identifier="BookId" xmlns="http://www.idpf.org/2007/opf">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+    <dc:language>en-US</dc:language>
+    <dc:title>Made with Creative Commons</dc:title>
+    <dc:creator>Paul Stacey and Sarah Hinchliff Pearson</dc:creator>
+    <dc:subject>This is a book about sharing. It is about sharing textbooks, music, data, art, more. People, organizations, and businesses all over the world are sharing their work using Creative Commons licenses because they want to encourage the public to reuse their works, to copy them, to modify them. They are Made with Creative Commons.</dc:subject>
+    <dc:description>Part analysis, part handbook, part collection of case studies, this book is a guide to sharing your knowl-edge and creativity with the world, and sustaining your operation while you do. Going from a propri-etary all-rights-reserved model to one that lets others copy, reuse, and modify your work is a big change. Made with Creative Commons describes the mindshift, the benefits, and the practices that come with going “open.”
+
+
+
+It makes the case that sharing is good for business, especially for companies, organizations, and cre-ators who care about more than just the bottom line. Full of practical advice and inspiring stories, Made with Creative Commons is a book that will show you what it really means to share.</dc:description>
+    <dc:format>ePub2.0</dc:format>
+    <dc:publisher>Ctrl+Alt+Delete Books http://www.cadb.dk</dc:publisher>
+    <dc:date opf:event="publication">2017-03-19T12:51:26Z</dc:date>
+    <dc:date opf:event="modification">2017-04-30</dc:date>
+    <dc:rights>This book is published under a CC BY-SA license, which means that you can copy, redistribute, remix, transform, and build upon the content for any purpose, even commercially, as long as you give appropriate credit, provide a link to the license, and indicate if changes were made. If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original. License details:
+
+http://creativecommons.org/licenses/by-sa/4.0/</dc:rights>
+    <dc:contributor>Mario Lurig</dc:contributor>
+    <dc:identifier opf:scheme="ISBN">978-87-998733-3-3</dc:identifier>
+    <dc:identifier id="BookId" opf:scheme="UUID">urn:uuid:05bbbd6c-5ed6-4081-9d72-21fc83d671b5</dc:identifier>
+    <meta name="Sigil version" content="0.9.6" />
+    <meta name="cover" content="CtrlAltDel_-_Made_with_CC_-_Cover.jpg" />
+  </metadata>
+  <manifest>
+    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/>
+    <item id="title.xhtml" href="Text/title.xhtml" media-type="application/xhtml+xml"/>
+    <item id="cover.xhtml" href="Text/cover.xhtml" media-type="application/xhtml+xml"/>
+    <item id="license.xhtml" href="Text/license.xhtml" media-type="application/xhtml+xml"/>
+    <item id="davidfosterwallace.xhtml" href="Text/davidfosterwallace.xhtml" media-type="application/xhtml+xml"/>
+    <item id="acknowledgements.xhtml" href="Text/acknowledgements.xhtml" media-type="application/xhtml+xml"/>
+    <item id="cc-logo-xs.jpg" href="Images/cc-logo-xs.jpg" media-type="image/jpeg"/>
+    <item id="ctrlaltdel-logo.jpg" href="Images/ctrlaltdel-logo.jpg" media-type="image/jpeg"/>
+    <item id="Style0001.css" href="Styles/Style0001.css" media-type="text/css"/>
+    <item id="forward.xhtml" href="Text/forward.xhtml" media-type="application/xhtml+xml"/>
+    <item id="introduction.xhtml" href="Text/introduction.xhtml" media-type="application/xhtml+xml"/>
+    <item id="part1.xhtml" href="Text/part1.xhtml" media-type="application/xhtml+xml"/>
+    <item id="Resource__detailed_.png" href="Images/Resource__detailed_.png" media-type="image/png"/>
+    <item id="thenewworldofdigitalcommons.xhtml" href="Text/thenewworldofdigitalcommons.xhtml" media-type="application/xhtml+xml"/>
+    <item id="howtobemadewithcreativecommons.xhtml" href="Text/howtobemadewithcreativecommons.xhtml" media-type="application/xhtml+xml"/>
+    <item id="by.png" href="Images/by.png" media-type="image/png"/>
+    <item id="by-sa.png" href="Images/by-sa.png" media-type="image/png"/>
+    <item id="by-nd.png" href="Images/by-nd.png" media-type="image/png"/>
+    <item id="by-nc.png" href="Images/by-nc.png" media-type="image/png"/>
+    <item id="by-nc-sa.png" href="Images/by-nc-sa.png" media-type="image/png"/>
+    <item id="by-nc-nd.png" href="Images/by-nc-nd.png" media-type="image/png"/>
+    <item id="cc-zero.png" href="Images/cc-zero.png" media-type="image/png"/>
+    <item id="publicdomain.png" href="Images/publicdomain.png" media-type="image/png"/>
+    <item id="thecreativecommonslicenses.xhtml" href="Text/thecreativecommonslicenses.xhtml" media-type="application/xhtml+xml"/>
+    <item id="part2.xhtml" href="Text/part2.xhtml" media-type="application/xhtml+xml"/>
+    <item id="by-sa1.png" href="Images/by-sa1.png" media-type="image/png"/>
+    <item id="arduino.xhtml" href="Text/arduino.xhtml" media-type="application/xhtml+xml"/>
+    <item id="an_unusual_invitation.png" href="Images/an_unusual_invitation.png" media-type="image/png"/>
+    <item id="an_unusual_invitation1.png" href="Images/an_unusual_invitation1.png" media-type="image/png"/>
+    <item id="an_unusual_invitation2.png" href="Images/an_unusual_invitation2.png" media-type="image/png"/>
+    <item id="Business_2_point_0.png" href="Images/Business_2_point_0.png" media-type="image/png"/>
+    <item id="Driven_by_social_good.png" href="Images/Driven_by_social_good.png" media-type="image/png"/>
+    <item id="Enterprise.png" href="Images/Enterprise.png" media-type="image/png"/>
+    <item id="Goods.png" href="Images/Goods.png" media-type="image/png"/>
+    <item id="Pre-industrialised.png" href="Images/Pre-industrialised.png" media-type="image/png"/>
+    <item id="State_takeover.png" href="Images/State_takeover.png" media-type="image/png"/>
+    <item id="Today.png" href="Images/Today.png" media-type="image/png"/>
+    <item id="artica.xhtml" href="Text/artica.xhtml" media-type="application/xhtml+xml"/>
+    <item id="by1.png" href="Images/by1.png" media-type="image/png"/>
+    <item id="blenderinstitute.xhtml" href="Text/blenderinstitute.xhtml" media-type="application/xhtml+xml"/>
+    <item id="by-nc-sa1.png" href="Images/by-nc-sa1.png" media-type="image/png"/>
+    <item id="cardsagainsthumanity.xhtml" href="Text/cardsagainsthumanity.xhtml" media-type="application/xhtml+xml"/>
+    <item id="by-nd1.png" href="Images/by-nd1.png" media-type="image/png"/>
+    <item id="theconversation.xhtml" href="Text/theconversation.xhtml" media-type="application/xhtml+xml"/>
+    <item id="corydoctorow.xhtml" href="Text/corydoctorow.xhtml" media-type="application/xhtml+xml"/>
+    <item id="figshare.xhtml" href="Text/figshare.xhtml" media-type="application/xhtml+xml"/>
+    <item id="figurenz.xhtml" href="Text/figurenz.xhtml" media-type="application/xhtml+xml"/>
+    <item id="knowledgeunlatched.xhtml" href="Text/knowledgeunlatched.xhtml" media-type="application/xhtml+xml"/>
+    <item id="lumenlearning.xhtml" href="Text/lumenlearning.xhtml" media-type="application/xhtml+xml"/>
+    <item id="jonathanmann.xhtml" href="Text/jonathanmann.xhtml" media-type="application/xhtml+xml"/>
+    <item id="nounproject.xhtml" href="Text/nounproject.xhtml" media-type="application/xhtml+xml"/>
+    <item id="opendatainstitute.xhtml" href="Text/opendatainstitute.xhtml" media-type="application/xhtml+xml"/>
+    <item id="by-nc1.png" href="Images/by-nc1.png" media-type="image/png"/>
+    <item id="opendesk.xhtml" href="Text/opendesk.xhtml" media-type="application/xhtml+xml"/>
+    <item id="anunusualinvitation.xhtml" href="Text/anunusualinvitation.xhtml" media-type="application/xhtml+xml"/>
+    <item id="an_unusual_invitation3.png" href="Images/an_unusual_invitation3.png" media-type="image/png"/>
+    <item id="openstax.xhtml" href="Text/openstax.xhtml" media-type="application/xhtml+xml"/>
+    <item id="amandapalmer.xhtml" href="Text/amandapalmer.xhtml" media-type="application/xhtml+xml"/>
+    <item id="plos.xhtml" href="Text/plos.xhtml" media-type="application/xhtml+xml"/>
+    <item id="rijksmuseum.xhtml" href="Text/rijksmuseum.xhtml" media-type="application/xhtml+xml"/>
+    <item id="shareable.xhtml" href="Text/shareable.xhtml" media-type="application/xhtml+xml"/>
+    <item id="siyavula.xhtml" href="Text/siyavula.xhtml" media-type="application/xhtml+xml"/>
+    <item id="business20.xhtml" href="Text/business20.xhtml" media-type="application/xhtml+xml"/>
+    <item id="sparkfun.xhtml" href="Text/sparkfun.xhtml" media-type="application/xhtml+xml"/>
+    <item id="by-nc-nd1.png" href="Images/by-nc-nd1.png" media-type="image/png"/>
+    <item id="teachaids.xhtml" href="Text/teachaids.xhtml" media-type="application/xhtml+xml"/>
+    <item id="tribeofnoise.xhtml" href="Text/tribeofnoise.xhtml" media-type="application/xhtml+xml"/>
+    <item id="wikimedia.xhtml" href="Text/wikimedia.xhtml" media-type="application/xhtml+xml"/>
+    <item id="bibliography.xhtml" href="Text/bibliography.xhtml" media-type="application/xhtml+xml"/>
+    <item id="CtrlAltDel_-_Made_with_CC_-_Cover.jpg" href="Images/CtrlAltDel_-_Made_with_CC_-_Cover.jpg" media-type="image/jpeg"/>
+    <item id="OpenSans.ttf" href="Fonts/OpenSans.ttf" media-type="application/x-font-truetype"/>
+    <item id="OpenSans-Bold.ttf" href="Fonts/OpenSans-Bold.ttf" media-type="application/x-font-truetype"/>
+    <item id="OpenSans-BoldItalic.ttf" href="Fonts/OpenSans-BoldItalic.ttf" media-type="application/x-font-truetype"/>
+    <item id="OpenSans-Extrabold.ttf" href="Fonts/OpenSans-Extrabold.ttf" media-type="application/x-font-truetype"/>
+    <item id="OpenSans-Italic.ttf" href="Fonts/OpenSans-Italic.ttf" media-type="application/x-font-truetype"/>
+    <item id="id" href="Fonts/AbrilFatface-Regular.ttf" media-type="application/x-font-truetype"/>
+  </manifest>
+  <spine toc="ncx">
+    <itemref idref="cover.xhtml"/>
+    <itemref idref="title.xhtml"/>
+    <itemref idref="license.xhtml"/>
+    <itemref idref="davidfosterwallace.xhtml"/>
+    <itemref idref="forward.xhtml"/>
+    <itemref idref="introduction.xhtml"/>
+    <itemref idref="part1.xhtml"/>
+    <itemref idref="thenewworldofdigitalcommons.xhtml"/>
+    <itemref idref="howtobemadewithcreativecommons.xhtml"/>
+    <itemref idref="thecreativecommonslicenses.xhtml"/>
+    <itemref idref="part2.xhtml"/>
+    <itemref idref="arduino.xhtml"/>
+    <itemref idref="artica.xhtml"/>
+    <itemref idref="blenderinstitute.xhtml"/>
+    <itemref idref="cardsagainsthumanity.xhtml"/>
+    <itemref idref="theconversation.xhtml"/>
+    <itemref idref="corydoctorow.xhtml"/>
+    <itemref idref="figshare.xhtml"/>
+    <itemref idref="figurenz.xhtml"/>
+    <itemref idref="knowledgeunlatched.xhtml"/>
+    <itemref idref="lumenlearning.xhtml"/>
+    <itemref idref="jonathanmann.xhtml"/>
+    <itemref idref="nounproject.xhtml"/>
+    <itemref idref="opendatainstitute.xhtml"/>
+    <itemref idref="opendesk.xhtml"/>
+    <itemref idref="amandapalmer.xhtml"/>
+    <itemref idref="anunusualinvitation.xhtml"/>
+    <itemref idref="openstax.xhtml"/>
+    <itemref idref="plos.xhtml"/>
+    <itemref idref="rijksmuseum.xhtml"/>
+    <itemref idref="shareable.xhtml"/>
+    <itemref idref="siyavula.xhtml"/>
+    <itemref idref="business20.xhtml"/>
+    <itemref idref="sparkfun.xhtml"/>
+    <itemref idref="teachaids.xhtml"/>
+    <itemref idref="tribeofnoise.xhtml"/>
+    <itemref idref="wikimedia.xhtml"/>
+    <itemref idref="bibliography.xhtml"/>
+    <itemref idref="acknowledgements.xhtml"/>
+  </spine>
+  <guide>
+    <reference type="cover" title="Cover" href="Text/cover.xhtml"/>
+  </guide>
+</package>

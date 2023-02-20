@@ -1,0 +1,74 @@
+.indent div {text-indent:25px;}
+div.noindent {text-indent:0 !important;}
+li {text-indent:0 !important;}
+
+@font-face {
+	font-family:"Open Sans";
+	font-style:normal;
+	font-weight:normal;
+	src : url("../Fonts/OpenSans.ttf");
+}
+@font-face {
+	font-family:"Open Sans";
+	font-style:normal;
+	font-weight:bold;
+	src : url("../Fonts/OpenSans-Bold.ttf");
+}
+@font-face {
+	font-family:"Open Sans";
+	font-style:italic;
+	font-weight:bold;
+	src : url("../Fonts/OpenSans-BoldItalic.ttf");
+}
+@font-face {
+	font-family:"Open Sans";
+	font-style:oblique;
+	font-weight:bold;
+	src : url("../Fonts/OpenSans-BoldItalic.ttf");
+}
+@font-face {
+	font-family:"Open Sans Extrabold";
+	font-style:normal;
+	font-weight:800;
+	src : url("../Fonts/OpenSans-Extrabold.ttf");
+}
+@font-face {
+	font-family:"Open Sans";
+	font-style:italic;
+	font-weight:normal;
+	src : url("../Fonts/OpenSans-Italic.ttf");
+}
+@font-face {
+	font-family:"Open Sans";
+	font-style:oblique;
+	font-weight:normal;
+	src : url("../Fonts/OpenSans-Italic.ttf");
+}
+@font-face {
+	font-family: "Abril Fatface";
+	src: url("../Fonts/AbrilFatface-Regular.ttf")
+}
+
+body {
+	font-family:"Open Sans", sans-serif;
+}
+h1{
+  color: #1d1d1b;
+  font-family: "Abril Fatface", serif;
+  font-size: 80px;
+  font-style: normal;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+h2{
+  color: #1d1d1b;
+  font-family: "Abril Fatface", serif;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: normal;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+img.wide {
+  width: 100%;
+}

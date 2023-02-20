@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN"
+ "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd"><ncx version="2005-1" xmlns="http://www.daisy.org/z3986/2005/ncx/">
+  <head>
+    <meta content="urn:uuid:05bbbd6c-5ed6-4081-9d72-21fc83d671b5" name="dtb:uid"/>
+    <meta content="5" name="dtb:depth"/>
+    <meta content="0" name="dtb:totalPageCount"/>
+    <meta content="0" name="dtb:maxPageNumber"/>
+  </head>
+  <docTitle>
+    <text>Made with Creative Commons</text>
+  </docTitle>
+  <navMap>
+    <navPoint id="navPoint-1" playOrder="1">
+      <navLabel>
+        <text>Made with Creative Commons</text>
+      </navLabel>
+      <content src="Text/title.xhtml"/>
+      <navPoint id="navPoint-2" playOrder="2">
+        <navLabel>
+          <text>License</text>
+        </navLabel>
+        <content src="Text/license.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-3" playOrder="3">
+        <navLabel>
+          <text>Foreword</text>
+        </navLabel>
+        <content src="Text/forward.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-4" playOrder="4">
+        <navLabel>
+          <text>Introduction</text>
+        </navLabel>
+        <content src="Text/introduction.xhtml"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-5" playOrder="5">
+      <navLabel>
+        <text>Part 1: The Big Picture</text>
+      </navLabel>
+      <content src="Text/part1.xhtml"/>
+      <navPoint id="navPoint-6" playOrder="6">
+        <navLabel>
+          <text>The New World of Digital Commons</text>
+        </navLabel>
+        <content src="Text/thenewworldofdigitalcommons.xhtml"/>
+        <navPoint id="navPoint-7" playOrder="7">
+          <navLabel>
+            <text>The Commons, the Market, and the State</text>
+          </navLabel>
+          <content src="Text/thenewworldofdigitalcommons.xhtml#sigil_toc_id_1"/>
+        </navPoint>
+        <navPoint id="navPoint-8" playOrder="8">
+          <navLabel>
+            <text>The Four Aspects of a Resource</text>
+          </navLabel>
+          <content src="Text/thenewworldofdigitalcommons.xhtml#sigil_toc_id_2"/>
+          <navPoint id="navPoint-9" playOrder="9">
+            <navLabel>
+              <text>Characteristics</text>
+            </navLabel>
+            <content src="Text/thenewworldofdigitalcommons.xhtml#sigil_toc_id_3"/>
+          </navPoint>
+          <navPoint id="navPoint-10" playOrder="10">
+            <navLabel>
+              <text>People and processes</text>
+            </navLabel>
+            <content src="Text/thenewworldofdigitalcommons.xhtml#sigil_toc_id_4"/>
+          </navPoint>
+          <navPoint id="navPoint-11" playOrder="11">
+            <navLabel>
+              <text>Norms and rules</text>
+            </navLabel>
+            <content src="Text/thenewworldofdigitalcommons.xhtml#sigil_toc_id_5"/>
+          </navPoint>
+          <navPoint id="navPoint-12" playOrder="12">
+            <navLabel>
+              <text>Goals</text>
+            </navLabel>
+            <content src="Text/thenewworldofdigitalcommons.xhtml#sigil_toc_id_6"/>
+          </navPoint>
+        </navPoint>
+        <navPoint id="navPoint-13" playOrder="13">
+          <navLabel>
+            <text>A Short History of the Commons</text>
+          </navLabel>
+          <content src="Text/thenewworldofdigitalcommons.xhtml#sigil_toc_id_7"/>
+        </navPoint>
+        <navPoint id="navPoint-14" playOrder="14">
+          <navLabel>
+            <text>The Digital Revolution</text>
+          </navLabel>
+          <content src="Text/thenewworldofdigitalcommons.xhtml#sigil_toc_id_8"/>
+        </navPoint>
+        <navPoint id="navPoint-15" playOrder="15">
+          <navLabel>
+            <text>The Birth of Creative Commons</text>
+          </navLabel>
+          <content src="Text/thenewworldofdigitalcommons.xhtml#sigil_toc_id_9"/>
+        </navPoint>
+        <navPoint id="navPoint-16" playOrder="16">
+          <navLabel>
+            <text>The Changing Market</text>
+          </navLabel>
+          <content src="Text/thenewworldofdigitalcommons.xhtml#sigil_toc_id_10"/>
+        </navPoint>
+        <navPoint id="navPoint-17" playOrder="17">
+          <navLabel>
+            <text>Benefits of the Digital Commons</text>
+          </navLabel>
+          <content src="Text/thenewworldofdigitalcommons.xhtml#sigil_toc_id_11"/>
+        </navPoint>
+        <navPoint id="navPoint-18" playOrder="18">
+          <navLabel>
+            <text>Our Case Studies</text>
+          </navLabel>
+          <content src="Text/thenewworldofdigitalcommons.xhtml#sigil_toc_id_12"/>
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-19" playOrder="19">
+        <navLabel>
+          <text>How to Be Made with Creative Commons</text>
+        </navLabel>
+        <content src="Text/howtobemadewithcreativecommons.xhtml"/>
+        <navPoint id="navPoint-20" playOrder="20">
+          <navLabel>
+            <text>Problem Zero: Getting Discovered</text>
+          </navLabel>
+          <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_14"/>
+          <navPoint id="navPoint-21" playOrder="21">
+            <navLabel>
+              <text>Use CC to grow a larger audience</text>
+            </navLabel>
+            <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_15"/>
+          </navPoint>
+          <navPoint id="navPoint-22" playOrder="22">
+            <navLabel>
+              <text>Use CC to get attribution and name recognition</text>
+            </navLabel>
+            <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_16"/>
+          </navPoint>
+          <navPoint id="navPoint-23" playOrder="23">
+            <navLabel>
+              <text>Use CC-licensed content as a marketing tool</text>
+            </navLabel>
+            <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_17"/>
+          </navPoint>
+          <navPoint id="navPoint-24" playOrder="24">
+            <navLabel>
+              <text>Use CC to enable hands-on engagement with your work</text>
+            </navLabel>
+            <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_18"/>
+          </navPoint>
+          <navPoint id="navPoint-25" playOrder="25">
+            <navLabel>
+              <text>Use CC to differentiate yourself</text>
+            </navLabel>
+            <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_19"/>
+          </navPoint>
+        </navPoint>
+        <navPoint id="navPoint-26" playOrder="26">
+          <navLabel>
+            <text>Making Money</text>
+          </navLabel>
+          <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_20"/>
+          <navPoint id="navPoint-27" playOrder="27">
+            <navLabel>
+              <text>Market-based revenue streams</text>
+            </navLabel>
+            <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_21"/>
+            <navPoint id="navPoint-28" playOrder="28">
+              <navLabel>
+                <text>Providing a custom service to consumers of your work [MARKET-BASED]</text>
+              </navLabel>
+              <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_22"/>
+            </navPoint>
+            <navPoint id="navPoint-29" playOrder="29">
+              <navLabel>
+                <text>Charging for the physical copy [MARKET-BASED]</text>
+              </navLabel>
+              <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_23"/>
+            </navPoint>
+            <navPoint id="navPoint-30" playOrder="30">
+              <navLabel>
+                <text>Charging for the in-person version [MARKET-BASED]</text>
+              </navLabel>
+              <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_24"/>
+            </navPoint>
+            <navPoint id="navPoint-31" playOrder="31">
+              <navLabel>
+                <text>Charging advertisers or sponsors [MARKET-BASED]</text>
+              </navLabel>
+              <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_25"/>
+            </navPoint>
+            <navPoint id="navPoint-32" playOrder="32">
+              <navLabel>
+                <text>Charging your content creators [MARKET-BASED]</text>
+              </navLabel>
+              <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_26"/>
+            </navPoint>
+            <navPoint id="navPoint-33" playOrder="33">
+              <navLabel>
+                <text>Charging a transaction fee [MARKET-BASED]</text>
+              </navLabel>
+              <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_27"/>
+            </navPoint>
+            <navPoint id="navPoint-34" playOrder="34">
+              <navLabel>
+                <text>Providing a service to your creators [MARKET-BASED]</text>
+              </navLabel>
+              <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_28"/>
+            </navPoint>
+            <navPoint id="navPoint-35" playOrder="35">
+              <navLabel>
+                <text>Licensing a trademark [MARKET-BASED]</text>
+              </navLabel>
+              <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_29"/>
+            </navPoint>
+          </navPoint>
+          <navPoint id="navPoint-36" playOrder="36">
+            <navLabel>
+              <text>Reciprocity-based revenue streams</text>
+            </navLabel>
+            <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_30"/>
+            <navPoint id="navPoint-37" playOrder="37">
+              <navLabel>
+                <text>Memberships and individual donations [RECIPROCITY-BASED]</text>
+              </navLabel>
+              <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_31"/>
+            </navPoint>
+            <navPoint id="navPoint-38" playOrder="38">
+              <navLabel>
+                <text>The pay-what-you-want model [RECIPROCITY-BASED]</text>
+              </navLabel>
+              <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_32"/>
+            </navPoint>
+            <navPoint id="navPoint-39" playOrder="39">
+              <navLabel>
+                <text>Crowdfunding [RECIPROCITY-BASED]</text>
+              </navLabel>
+              <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_33"/>
+            </navPoint>
+          </navPoint>
+        </navPoint>
+        <navPoint id="navPoint-40" playOrder="40">
+          <navLabel>
+            <text>Making Human Connections</text>
+          </navLabel>
+          <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_34"/>
+          <navPoint id="navPoint-41" playOrder="41">
+            <navLabel>
+              <text>Be human</text>
+            </navLabel>
+            <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_35"/>
+          </navPoint>
+          <navPoint id="navPoint-42" playOrder="42">
+            <navLabel>
+              <text>Be open and accountable</text>
+            </navLabel>
+            <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_36"/>
+          </navPoint>
+          <navPoint id="navPoint-43" playOrder="43">
+            <navLabel>
+              <text>Design for the good actors</text>
+            </navLabel>
+            <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_37"/>
+          </navPoint>
+          <navPoint id="navPoint-44" playOrder="44">
+            <navLabel>
+              <text>Treat humans like, well, humans</text>
+            </navLabel>
+            <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_38"/>
+          </navPoint>
+          <navPoint id="navPoint-45" playOrder="45">
+            <navLabel>
+              <text>State your principles and stick to them</text>
+            </navLabel>
+            <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_39"/>
+          </navPoint>
+          <navPoint id="navPoint-46" playOrder="46">
+            <navLabel>
+              <text>Build a community</text>
+            </navLabel>
+            <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_40"/>
+          </navPoint>
+          <navPoint id="navPoint-47" playOrder="47">
+            <navLabel>
+              <text>Give more to the commons than you take</text>
+            </navLabel>
+            <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_41"/>
+          </navPoint>
+          <navPoint id="navPoint-48" playOrder="48">
+            <navLabel>
+              <text>Involve people in what you do</text>
+            </navLabel>
+            <content src="Text/howtobemadewithcreativecommons.xhtml#sigil_toc_id_42"/>
+          </navPoint>
+        </navPoint>
+      </navPoint>
+      <navPoint id="navPoint-49" playOrder="49">
+        <navLabel>
+          <text>The Creative Commons Licenses</text>
+        </navLabel>
+        <content src="Text/thecreativecommonslicenses.xhtml"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-50" playOrder="50">
+      <navLabel>
+        <text>Part 2: The Case Studies</text>
+      </navLabel>
+      <content src="Text/part2.xhtml"/>
+      <navPoint id="navPoint-51" playOrder="51">
+        <navLabel>
+          <text>Arduino</text>
+        </navLabel>
+        <content src="Text/arduino.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-52" playOrder="52">
+        <navLabel>
+          <text>Ártica</text>
+        </navLabel>
+        <content src="Text/artica.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-53" playOrder="53">
+        <navLabel>
+          <text>Blender Institute</text>
+        </navLabel>
+        <content src="Text/blenderinstitute.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-54" playOrder="54">
+        <navLabel>
+          <text>Cards Against Humanity</text>
+        </navLabel>
+        <content src="Text/cardsagainsthumanity.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-55" playOrder="55">
+        <navLabel>
+          <text>The Conversation</text>
+        </navLabel>
+        <content src="Text/theconversation.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-56" playOrder="56">
+        <navLabel>
+          <text>Cory Doctorow</text>
+        </navLabel>
+        <content src="Text/corydoctorow.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-57" playOrder="57">
+        <navLabel>
+          <text>Figshare</text>
+        </navLabel>
+        <content src="Text/figshare.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-58" playOrder="58">
+        <navLabel>
+          <text>Figure.NZ</text>
+        </navLabel>
+        <content src="Text/figurenz.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-59" playOrder="59">
+        <navLabel>
+          <text>Knowledge Unlatched</text>
+        </navLabel>
+        <content src="Text/knowledgeunlatched.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-60" playOrder="60">
+        <navLabel>
+          <text>Lumen Learning</text>
+        </navLabel>
+        <content src="Text/lumenlearning.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-61" playOrder="61">
+        <navLabel>
+          <text>Jonathan Mann</text>
+        </navLabel>
+        <content src="Text/jonathanmann.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-62" playOrder="62">
+        <navLabel>
+          <text>The Noun Project</text>
+        </navLabel>
+        <content src="Text/nounproject.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-63" playOrder="63">
+        <navLabel>
+          <text>Open Data Institute</text>
+        </navLabel>
+        <content src="Text/opendatainstitute.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-64" playOrder="64">
+        <navLabel>
+          <text>OpenDesk</text>
+        </navLabel>
+        <content src="Text/opendesk.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-65" playOrder="65">
+        <navLabel>
+          <text>OpenStax</text>
+        </navLabel>
+        <content src="Text/openstax.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-66" playOrder="66">
+        <navLabel>
+          <text>Amanda Palmer</text>
+        </navLabel>
+        <content src="Text/amandapalmer.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-67" playOrder="67">
+        <navLabel>
+          <text>PLOS (Public Library of Science)</text>
+        </navLabel>
+        <content src="Text/plos.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-68" playOrder="68">
+        <navLabel>
+          <text>Rijksmuseum</text>
+        </navLabel>
+        <content src="Text/rijksmuseum.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-69" playOrder="69">
+        <navLabel>
+          <text>Shareable</text>
+        </navLabel>
+        <content src="Text/shareable.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-70" playOrder="70">
+        <navLabel>
+          <text>Siyavula</text>
+        </navLabel>
+        <content src="Text/siyavula.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-71" playOrder="71">
+        <navLabel>
+          <text>Sparkfun</text>
+        </navLabel>
+        <content src="Text/sparkfun.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-72" playOrder="72">
+        <navLabel>
+          <text>TeachAIDS</text>
+        </navLabel>
+        <content src="Text/teachaids.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-73" playOrder="73">
+        <navLabel>
+          <text>Tribe of Noise</text>
+        </navLabel>
+        <content src="Text/tribeofnoise.xhtml"/>
+      </navPoint>
+      <navPoint id="navPoint-74" playOrder="74">
+        <navLabel>
+          <text>Wikimedia Foundation</text>
+        </navLabel>
+        <content src="Text/wikimedia.xhtml"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="navPoint-75" playOrder="75">
+      <navLabel>
+        <text>Bibliography</text>
+      </navLabel>
+      <content src="Text/bibliography.xhtml"/>
+    </navPoint>
+    <navPoint id="navPoint-76" playOrder="76">
+      <navLabel>
+        <text>Acknowledgements</text>
+      </navLabel>
+      <content src="Text/acknowledgements.xhtml"/>
+    </navPoint>
+  </navMap>
+</ncx>
