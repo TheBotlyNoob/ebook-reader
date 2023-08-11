@@ -3,7 +3,6 @@ use base64::prelude::*;
 use dioxus::prelude::*;
 use epub::doc::EpubDoc;
 use std::io::Cursor;
-use tracing::info;
 
 /// Creates a `data:image/` url from a byte slice
 pub fn data_url_from_bytes(bytes: &[u8]) -> String {
@@ -12,48 +11,65 @@ pub fn data_url_from_bytes(bytes: &[u8]) -> String {
     data
 }
 
-pub fn book<'cx>(cx: Scope<'cx>, book: LateBook<'cx>) -> Element<'cx> {
+pub fn book<'cx>(cx: Scope<'cx>, book: &'cx LateBook) -> Element<'cx> {
     let reading = use_state(cx, || false);
 
-    cx.render(rsx! {
-        Fragment {
-            style {
-                "
-                display: flex;
-                flex-direction: column;
-                height: 100%;
-                width: 100%;
-                "
-            },
-            if **reading {
-                read(cx, book)
-            } else {
-                info(cx, book, reading)
-            }
-        }
-    })
+    if **reading {
+        read(cx, book)
+    } else {
+        info(cx, book, reading)
+    }
 }
 
-fn read<'cx>(cx: Scope<'cx>, book: LateBook) -> Element<'cx> {
-    book.with_mut_silent(|book| {
+fn read<'cx>(cx: Scope<'cx>, book: &'cx LateBook) -> Element<'cx> {
+    let stripped = book.with_mut_silent(|book| {
         book.doc.go_next();
-        let (mut current_page, _mime) = book.doc.get_current_str().unwrap();
-
-        info!(stripped = ?current_page.len());
+        let (current_page, _mime) = book.doc.get_current_str().unwrap();
 
         let mut stripped = String::with_capacity(current_page.len());
 
-        while let Some(start) = current_page.find("<style") {
-            let end = current_page[start..].find("</style>").unwrap() + start + 8;
-            stripped.push_str(&current_page[..start]);
-            stripped.push_str(&current_page[end..]);
-            current_page = current_page[end..].to_owned();
+        let mut to_strip = vec![];
+
+        let links = current_page
+            .match_indices("<link")
+            .zip(current_page.match_indices('>'))
+            .map(|((s, _), (e, _))| (s, e))
+            .collect::<Vec<_>>();
+
+        tracing::info!(?links);
+
+        let styles = current_page
+            .match_indices("<style")
+            .zip(current_page.match_indices("</style>"))
+            .map(|((s, _), (e, _))| (s, e))
+            .collect::<Vec<_>>();
+
+        tracing::info!(?styles);
+
+        to_strip.extend_from_slice(&links);
+        to_strip.extend_from_slice(&styles);
+
+        to_strip.sort_by_key(|(s, _)| *s);
+
+        let mut offset = 0;
+        for (start, end) in to_strip {
+            stripped.push_str(&current_page[offset..start]);
+            offset = end;
         }
+        stripped.push_str(&current_page[offset..]);
+
         // get all src attributes and replace them with data urls
-        while let Some(mut start) = current_page.find("src=\"") {
+        while let Some(mut start) = stripped.find("src=\"") {
             start += 5;
-            let end = current_page[start..].find('"').unwrap() + start;
-            let mut src = current_page[start..end].replace("../", "");
+
+            let end = stripped[start..].find('"').unwrap() + start;
+            let mut src = &stripped[start..end];
+
+            while let Some(stripped) = src.strip_prefix("../") {
+                src = stripped;
+            }
+
+            let mut src = src.to_owned();
 
             let data = if src.starts_with("data:") {
                 src
@@ -61,39 +77,42 @@ fn read<'cx>(cx: Scope<'cx>, book: LateBook) -> Element<'cx> {
                 if !src.starts_with("OEBPS") {
                     src = format!("OEBPS/{}", src);
                 }
-                println!("src: {}", src);
+                tracing::info!("src: {}", src);
                 let data = book.doc.get_resource_by_path(&src).unwrap();
                 data_url_from_bytes(&data)
             };
 
-            stripped.push_str(&current_page[..start]);
-            stripped.push_str(&data);
-            current_page = current_page[end..].to_owned();
+            stripped.replace_range(start..end, &data);
         }
 
-        cx.render(rsx! {
+        stripped
+    });
+
+    cx.render(rsx! {
             article {
-                flex: 1,
                 overflow: "auto",
                 width: "100%",
                 height: "100%",
 
-                iframe {
-                    srcdoc: "{stripped}",
-                    width: "100%",
-                    height: "100%",
-                    style {
-                        "border: none;"
-                    }
-                }
+                dangerous_inner_html: "{stripped}",
             }
-        })
+
+            // turn_page(cx, book, Direction::Left)
+            // turn_page(cx, book, Direction::Right)
     })
 }
 
-fn info<'cx>(cx: Scope<'cx>, book: LateBook<'cx>, reading: &'cx UseState<bool>) -> Element<'cx> {
-    book.with(|book| {
+fn info<'cx>(cx: Scope<'cx>, book: &'cx LateBook, reading: &'cx UseState<bool>) -> Element<'cx> {
+    book.with(|book: &Book| {
         cx.render(rsx! {
+            style {
+                "
+                #main {{
+                    text-align: center;
+                }}
+                "
+            }
+
             h1 {
                 book.title.clone()
             }
@@ -119,6 +138,13 @@ fn info<'cx>(cx: Scope<'cx>, book: LateBook<'cx>, reading: &'cx UseState<bool>) 
 
 pub fn open_book<'cx>(cx: Scope<'cx>, book: &'cx UseRef<Option<Book>>) -> Element<'cx> {
     cx.render(rsx! {
+        style {
+            "
+            #main {{
+                text-align: center;
+            }}
+            "
+        }
         button {
             onclick: move |_| {
                 let book = book.to_owned();
@@ -128,6 +154,36 @@ pub fn open_book<'cx>(cx: Scope<'cx>, book: &'cx UseRef<Option<Book>>) -> Elemen
             },
 
             "Open Book"
+        }
+    })
+}
+
+#[derive(Clone, Copy, Debug)]
+pub enum Direction {
+    Left,
+    Right,
+}
+
+pub fn turn_page<'cx>(cx: Scope<'cx>, book: &'cx LateBook, direction: Direction) -> Element<'cx> {
+    cx.render(rsx! {
+        style {
+            "
+            #main {{
+                text-align: center;
+            }}
+            "
+        }
+        button {
+            onclick: move |_| {
+                book.with_mut(|book| {
+                    match direction {
+                        Direction::Left => book.doc.go_prev(),
+                        Direction::Right => book.doc.go_next(),
+                    }
+                });
+            },
+
+            format_args!("Turn Page {direction:?}")
         }
     })
 }

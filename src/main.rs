@@ -22,18 +22,12 @@ fn main() {
                     })),
             )
             .init();
+        dioxus_desktop::launch(ebook_reader::app);
     }
     #[cfg(target_arch = "wasm32")]
     {
         console_error_panic_hook::set_once();
         tracing_wasm::set_as_global_default();
-    }
-
-    cfg_if::cfg_if! {
-        if #[cfg(target_arch = "wasm32")] {
-            dioxus_web::launch(ebook_reader::app);
-        } else {
-            dioxus_desktop::launch(ebook_reader::app);
-        }
+        dioxus_web::launch(ebook_reader::app);
     }
 }

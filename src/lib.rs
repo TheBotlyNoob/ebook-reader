@@ -6,23 +6,15 @@ use book::Book;
 pub fn app(cx: Scope) -> Element {
     let book = use_ref(cx, || None);
 
+    let latebook = LateBook(book);
+
     cx.render(rsx! {
         style {
-            "{include_str!(\"../assets/simple.min.css\")}
-
-             html, body, #main {{
-                 width: 100%;
-                 height: 100%;
-                 padding: 0;
-                 margin: 0;
-             }}      
-            "
+            include_str!("axist.min.css")
         }
-        main {
-            height: "100%",
-            width: "100%",
+        Fragment {
             if book.read().is_some() {
-                book::book(cx, LateBook(book))
+                book::book(cx, &latebook)
             } else {
                 book::open_book(cx, book)
             }
